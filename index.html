@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drag & Drog Using JavaScript</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="left">
+        <div class="list" draggable="true">
+          <img src="drag_drop_icon.png" />List Item 1
+        </div>
+        <div class="list" draggable="true">
+          <img src="drag_drop_icon.png" />List Item 2
+        </div>
+        <div class="list" draggable="true">
+          <img src="drag_drop_icon.png" />List Item 3
+        </div>
+        <div class="list" draggable="true">
+          <img src="drag_drop_icon.png" />List Item 4
+        </div>
+      </div>
+      <!-- <button onclick="add()">Add More...</button> -->
+        <div id="right"></div>
+    </div>
+    <script>
+      let lists = document.querySelectorAll(".list");
+      let rightBox = document.getElementById("right");
+      let leftBox = document.getElementById("left");
+      function updateList() {
+        for (list of lists) {
+          list.addEventListener("dragstart", function (e) {
+            let selected = e.target;
+
+            rightBox.addEventListener("dragover", function (e) {
+              e.preventDefault();
+            });
+            rightBox.addEventListener("drop", function (e) {
+              rightBox.appendChild(selected);
+              selected = null;
+            });
+            leftBox.addEventListener("dragover", function (e) {
+              e.preventDefault();
+            });
+            leftBox.addEventListener("drop", function (e) {
+              leftBox.appendChild(selected);
+              selected = null;
+            });
+          });
+          document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("list")) {
+       e.target.remove();
+    }
+});
+
+        }
+      }
+    //   function add() {
+    //     let elem = document.createElement("div");
+    //     const lastItem = lists.length - 1;
+    //     let index = lastItem + 2;
+    //     elem.innerHTML = "<img src='drag_drop_icon.png'>List Item " + index;
+    //     elem.classList.add("list");
+    //     elem.draggable = true;
+    //     leftBox.appendChild(elem);
+    //     lists = document.querySelectorAll(".list");
+    //     updateList();
+    //   }
+      updateList();
+
+      // const listContainer = document.getElementById("keep");
+
+      // for(list of lists){
+      //     list.addEventListener("dragstart", function(e){
+      //         let selected = e.target;
+
+      //         rightBox.addEventListener("dragover", function(e){
+      //             e.preventDefault();
+      //         });
+      //         rightBox.addEventListener("drop", function(e){
+      //             rightBox.appendChild(selected);
+      //             selected = null;
+      //         });
+      //         leftBox.addEventListener("dragover", function(e){
+      //             e.preventDefault();
+      //         });
+      //         leftBox.addEventListener("drop", function(e){
+      //             leftBox.appendChild(selected);
+      //             selected = null;
+      //         });
+      //     })
+      //     list.addEventListener('click', function(e){
+      //             e.target.remove();
+      //         });
+      //     }
+
+      // function saveData(){
+      //     localStorage.setItem("data", rightBox.innerHTML);
+      //     localStorage.setItem("data1", leftBox.innerHTML);
+      // }
+
+      // function showData(){
+      //     rightBox.innerHTML = localStorage.getItem("data");
+      //     leftBox.innerHTML = localStorage.getItem("data1");
+      // }
+    </script>
+  </body>
+</html>
